@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Image Resizer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    form {
+      margin-bottom: 20px;
+    }
+    img {
+      max-width: 300px;
+      display: block;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Upload and Resize Image</h1>
+
+  <form id="uploadForm">
+    <input type="file" id="imageInput" name="image" accept="image/*" required />
+    <button type="submit">Upload</button>
+  </form>
+
+  <div id="result">
+    <p><strong>Resized Image:</strong></p>
+    <img id="resizedImage" src="" alt="" />
+  </div>
+
+  <script>
+    const form = document.getElementById('uploadForm');
+    const imageInput = document.getElementById('imageInput');
+    const resizedImage = document.getElementById('resizedImage');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const file = imageInput.files[0];
+      if (!file) return alert('Please select an image.');
+
+      const formData = new FormData();
+      formData.append('image', file);
+
+      try {
+        const response = await fetch('http://localhost:7071/api/getImages', {
+          method: 'POST',
+          body: formData
+        });
+
+        if (!response.ok) throw new Error('Upload failed');
+
+        const blob = await response.blob();
+        resizedImage.src = URL.createObjectURL(blob);
+      } catch (err) {
+        alert('Error uploading image: ' + err.message);
+      }
+    });
+  </script>
+
+</body>
+</html>
