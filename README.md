@@ -2,8 +2,7 @@ Image Resizer Backend + Frontend
 
 **Overview**
 
-Image Resizer is a simple web-based application that allows users to upload an image, send it to a backend server, and receive a resized version in return. 
-The backend handles image processing, while the frontend offers a clean interface for users to upload and view images.
+This project is a simple web app where users can upload an image, send it to a backend server, and receive a resized version in return. The frontend (using HTML and JavaScript) provides a user-friendly form to select and upload an image. The backend (like an API running locally) processes the image — typically resizing it — and sends it back. The resized image is then displayed on the same page.It’s a lightweight tool to demonstrate how frontend and backend systems interact for basic image processing.
 
 **Project Structure**
 Frontend (index.html, script.js): A lightweight HTML/JS interface for file upload and display.
